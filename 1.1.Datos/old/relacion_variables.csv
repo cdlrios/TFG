@@ -1,0 +1,49 @@
+﻿NOMBRE VARIABLE;DESCRIPCIÓN VARIABLE;TIPO VARIABLE
+cod_est;Código de identificación númerico ;ID
+nom_est;Nombre de la estación;Texto
+edad_media;Edad promedio de los habitantes en un radio de 500 metros;Decimal
+pob_tot;Población total en un radio de 500 metros;Entero
+pers_hog;Número de personas por hogar en un radio de 500 metros;Decimal
+renta_pers;Renta (€) por persona media en un radio de 500 metros;Decimal
+renta_hog;Renta (€) por hogar media en un radio de 500 metros;Decimal
+%pob_ext;Porcentaje de población con nacionalidad extranjera en un radio de 500 metros;Porcentaje
+%pob_15;Porcentaje de población menor de 15 años en un radio de 500 metros;Porcentaje
+%pob_1664;Porcentaje de población entre 16 y 64 años en un radio de 500 metros;Porcentaje
+%pob_65;Porcentaje de población mayor de 65 años en un radio de 500 metros;Porcentaje
+por_pobact;Porcentaje de población activa en un radio de 500 metros;Porcentaje
+hog_tot;Número de hogares en un radio de 500 metros;Entero
+%hog_1;Porcentaje de Hogares con una mujer sola de 16 a 64 años;Porcentaje
+%hog_2;Porcentaje de Hogares con un hombre solo de 16 a 64 años;Porcentaje
+%hog_3;Porcentaje de Hogares con una mujer sola de 65 años o más;Porcentaje
+%hog_4;Porcentaje de Hogares con un hombre solo de 65 años o más;Porcentaje
+%hog_5;Porcentaje de Hogares con una mujer adulta con uno o más menores;Porcentaje
+%hog_6;Porcentaje de Hogares con un hombre adulto con uno o más menores;Porcentaje
+%hog_7;Porcentaje de Hogares con dos adultos de 16 a 64 años sin menores;Porcentaje
+%hog_8;Porcentaje de Hogares con dos adultos, uno al menos de 65 años o más, sin menores;Porcentaje
+%hog_9;Porcentaje de Hogares con dos adultos y un menor;Porcentaje
+%hog_10;Porcentaje de Hogares con dos adultos y dos menores;Porcentaje
+%hog_11;Porcentaje de Hogares con dos adultos y tres o más menores;Porcentaje
+%hog_12;Porcentaje de Hogares con tres adultos, dos de 35 años o más y otro de 16 a 34 años, sin menores;Porcentaje
+%hog_13;Porcentaje de Hogares con tres adultos, dos de 35 años o más y otro de 16 a 34 años y un menor;Porcentaje
+%hog_14;Porcentaje de Hogares con tres adultos, dos de 35 años o más y otro de 16 a 34 años y dos o más menores;Porcentaje
+%hog_15;Porcentaje de Hogares con tres adultos con o sin menores;Porcentaje
+%hog_16;Porcentaje de Hogares con cuatro adultos, dos de 35 años o más y dos de 16 a 34 años, sin menores;Porcentaje
+%hog_17;Porcentaje de Hogares con cuatro adultos, dos de 35 años o más y dos de 16 a 34 años y un menor;Porcentaje
+%hog_18;Porcentaje de Hogares con cuatro adultos, dos de 35 años o más y dos de 16 a 34 años y dos o más menores;Porcentaje
+%hog_19;Porcentaje de Hogares con cuatro adultos con o sin menores;Porcentaje
+%hog_20;Porcentaje de Hogares con cinco o más adultos con o sin menores;Porcentaje
+%hog_21;Porcentaje de Hogares con quince o más habitantes;Porcentaje
+%hog_22;Porcentaje de Hogares con menores solos;Porcentaje
+densidad;Habitantes por hectárea en un radio de 500 metros;Decimal
+ca_lineas;Número de líneas de metro que paran en la estación;Entero
+ca_lin_cerc;Número de líneas de Cercanías Renfe que paran en la estación;Entero
+ca_businter;Número de líneas de Autobús Interurbano;Entero
+in_bus_lr;Dispone o no de Líneas de Autobús de Largo Recorido;Booleano
+in_renfe_lr;Dispone o no de lineas de ferrocarril de largo recorrrdio;Booleano
+in_oficinattp;Dispone o no de Oficina de Tarjeta de Transporte Público;Booleano
+in_eventos;Dispone o no de un recinto para grandes eventos (>10.000) a 500 metros de la estación;Booleano
+in_parkdisgra;Dispone o no de un Aparcamiento Disuasorio Gratuito a menos de 500 metros de la estación;Booleano
+in_parkdispag;Dispone o no de un Aparcamiento Disuasorio de pago a menos de 500 metros de la estación;Booleano
+Eventodromo;Etiqueta del eventódromo cercano (si hay);Categórica
+conducta;Cuando tiene de media más afluencia la estación (Laborables o festivos);Categórica
+dem_mens_promedio_24_miles;Número de entradas mensuales acumuladas a la estación durante 2024 (en miles);Decimal

@@ -1,0 +1,21 @@
+library(dplyr)
+
+
+
+data_metro <- read.csv("data_metro.csv",header = TRUE, sep = ";")
+str(data_metro)
+names(data_metro)
+head(data_metro)
+metro_data = data_metro[c("demanda", "Num_linea", "Cercanias", "Bus_inter", "Renfe_LR", "Oficina_TPP", "Eventodromo_500",
+                          "Aparcadisu_gratis", "Aparcadisu_pago", "hog_tot", "pob_tot", "edad_media", "person_hogar", 
+                          "renper_pon", "renhog_pon", "dens_pond", "por15_pon", "por65_pon", "por1664pon", "poresp_pon",
+                          "porext_pon", "poractivid", "poract_pon", "X1mujsol_p", "X1hactsolp", "X1mujmay_p", "X1hommay_p",
+                          "X1mujmad_p", "X1hompad_p", "X2adusol_p", "X2adusma_p", "X2adumen_p", "X2adu2mn_p", "X2adu3mn_p", "X2adu1jv_p", 
+                          "X2a1jv1m_p", "X2a1jv2m_p", "X3adul_pon", "X2ad2jv_p", "X2a2j1m_p", "X2a2j2m_p", "X4adulto_p", "X5adulto_p", 
+                          "X15perso_p", "menas_p")]
+
+
+
+# análisis correlaciones --------------------------------------------------
+
+cor(metro_data)

@@ -1,0 +1,114 @@
+
+# Carga dependecias -------------------------------------------------------
+
+
+# Carga datos -------------------------------------------------------------
+
+data_metro <- read.csv("data_metro.csv",header = TRUE, sep = ";")
+
+# Exploración inicial -------
+str(data_metro)
+class(data_metro)
+dim(data_metro)
+names(data_metro)
+
+# Eliminamos variables no numéricas ----
+data_metro <- data_metro[, -c(1, 2)]
+
+# Mostramos características principales de nuestro dataframe ----
+head(data_metro)
+summary(data_metro)
+
+
+# Analisis de correlación -------------------------------------------------
+matriz_corr <- cor(data_metro)
+matriz_corr["demanda",]
+
+altamente_correladas <- findCorrelation(matriz_corr, cutoff = 0.9)
+data_reducida <- data_metro[,-altamente_correladas]
+variables <- setdiff(names(data_reducida),"demanda")
+
+# Crear lista para almacenar resultados
+resultados <- lapply(variables, function(var) {
+  test <- cor.test(data_reducida[[var]], data_reducida$demanda, method = "pearson")
+  data.frame(
+    variable = var,
+    r = round(test$estimate, 3),
+    p_value = round(test$p.value, 5)
+  )
+})
+
+# Unir todos los resultados en un data.frame
+tabla_resultados <- do.call(rbind, resultados)
+
+# Ordenar por p-value
+tabla_resultados <- tabla_resultados[order(tabla_resultados$p_value), ]
+
+# Ver los primeros resultados
+head(tabla_resultados)
+
+# descarto variables ------------------------------------------------------
+
+# Filtrar por significancia (p ≤ 0.05) y fuerza (|r| ≥ 0.2)
+variables_significativas <- tabla_resultados %>%
+  dplyr::filter(p_value <= 0.05, abs(r) >= 0.2) %>%
+  dplyr::pull(variable)
+
+# Crear nuevo dataset con esas variables + target
+datos_filtrados <- data_reducida[, c(variables_significativas, "demanda")]
+
+# Verificar
+str(datos_filtrados)
+
+# particion ---------------------------------------------------------------
+
+set.seed(123)
+particion <- createDataPartition(datos_filtrados$demanda, p = 0.8, list = FALSE)
+train <- datos_filtrados[particion,]
+test <- datos_filtrados[-particion,]
+
+# entreno modelos ----------------------------------------------------------
+
+modelo1 = demanda ~ Num_linea + Cercanias + Bus_inter + Renfe_LR + Oficina_TPP
+modelo2 = demanda ~ Num_linea + Cercanias + Bus_inter + Oficina_TPP + Renfe_LR + X1hactsolp + X2adu1jv_p + X2a1jv1m_p + X2a2j1m_p 
+modelo3 = demanda ~ Num_linea + Bus_inter + Cercanias + Oficina_TPP + X2a2j1m_p
+modelo4 = demanda ~ Num_linea + Cercanias + Bus_inter + Oficina_TPP + Renfe_LR + X1hactsolp + X2adu1jv_p + X2a1jv1m_p + X2a2j1m_p + X2adu2mn_p + X2adumen_p + person_hogar + X1mujmad_p + X2ad2jv_p + X2adusol_p + X1hommay_p + Aparcadisu_pago + por15_pon + X3adul_pon
+modelo5 = demanda ~ Num_linea + Cercanias + Bus_inter + Oficina_TPP + X2a2j1m_p + person_hogar + X1hommay_p
+
+ols = lm(modelo1, data = train)
+ols2 = lm(modelo2, data = train)
+ols3 = lm(modelo3, data = train)
+ols4 = lm(modelo4, data = train)
+ols5 = lm(modelo5, data = train)
+summary(ols)
+summary(ols2)
+summary(ols3)
+summary(ols4)
+summary(ols5)
+
+modelo6 <- lm(demanda ~ Num_linea + Cercanias + Bus_inter + Oficina_TPP + X2a2j1m_p, data = train)
+summary(modelo6)
+
+# compruebo ---------------------------------------------------------------
+
+# Paso 1: Predecir demanda en test con modelo6
+predicciones <- predict(modelo6, newdata = test)
+
+# Paso 2: Calcular errores (residuos)
+errores <- test$demanda - predicciones
+
+# Paso 3: Cálculo de métricas
+MAE <- mean(abs(errores))
+RMSE <- sqrt(mean(errores^2))
+
+cat("MAE:", round(MAE, 0), "\n")
+cat("RMSE:", round(RMSE, 0), "\n")
+
+# Paso 4: R² fuera de muestra
+SSE <- sum(errores^2)  # Suma de errores al cuadrado
+SST <- sum((test$demanda - mean(train$demanda))^2)  # Total
+R2_test <- 1 - (SSE / SST)
+
+cat("R² en test:", round(R2_test, 3), "\n")
+
+
