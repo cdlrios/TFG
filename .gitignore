@@ -1,0 +1,25 @@
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Cachés y metadatos
+__pycache__/
+*.py[cod]
+*.log
+
+# Archivos de editores
+*.swp
+*.swo
+*~
+*.bak
+
+# Entornos virtuales
+.env
+.venv/
+env/
+venv/
+
+# IDEs y notebooks
+.idea/
+.vscode/
+*.ipynb_checkpoints
